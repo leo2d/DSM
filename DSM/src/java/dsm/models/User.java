@@ -6,23 +6,26 @@
 package dsm.models;
 
 import dsm.enums.UserProfile;
+import javax.persistence.*;
 
 /**
  *
  * @author leo-r
  */
-public class User {
-
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     protected String login;
     protected String password;
     protected UserProfile profile;
+    private String name;
 
-    protected User(String login, String password, UserProfile profile) {
-        this.login = login;
-        this.password = password;
-        this.profile = profile;
+    public int getId() {
+        return id;
     }
-
 
     public String getLogin() {
         return login;
@@ -42,5 +45,17 @@ public class User {
 
     public UserProfile getProfile() {
         return profile;
+    }
+
+    public void setProfile(UserProfile profile) {
+        this.profile = profile;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,29 +1,13 @@
 package dsm.models;
 
-import dsm.enums.UserProfile;
+import javax.persistence.*;
 
-/**
- *
- * @author leo-r
- */
-public class Instructor extends User{
-    private int id;
-    private String name;
+@Entity
+public class Instructor extends User {
+
     private Schedule schedule;
 
-    public Instructor(int id, String name, Schedule schedule, String login, String password) {
-        super(login, password, UserProfile.INSTRUCTOR);
-        this.id = id;
-        this.name = name;
-        this.schedule = schedule;
-    }
-  
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Instructor() {
     }
 
     public Schedule getSchedule() {
@@ -33,5 +17,4 @@ public class Instructor extends User{
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
     }
-        
 }

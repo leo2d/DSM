@@ -6,30 +6,20 @@
 package dsm.models;
 
 import dsm.enums.UserProfile;
+import javax.persistence.*;
 
 /**
  *
  * @author leo-r
  */
+@Entity
 public class Student extends User{
-    private int id;
-    private String name;
+
     private String email;
     private Address address;
     private LessonPlan lessonPlan;
 
-    public Student(String login, String password) {
-        super(login, password, UserProfile.STUDENT);
+    public Student() {
     }
-
-    public Student(int id, String name, String email, Address address, LessonPlan lessonPlan, String login, String password) {
-        super(login, password, UserProfile.STUDENT);
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.address = address;
-        this.lessonPlan = lessonPlan;
-    }
-    
     
 }
