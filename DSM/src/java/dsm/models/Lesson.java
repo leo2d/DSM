@@ -16,14 +16,16 @@ public class Lesson {
     private int id;
     private LessonType type;
     private Date lessonTime;
+    private double Price;
 
     public Lesson() {
     }
-    
-    public Lesson(int id, LessonType type, Date lessonTime) {
+
+    public Lesson(int id, LessonType type, Date lessonTime, double Price) {
         this.id = id;
         this.type = type;
         this.lessonTime = lessonTime;
+        this.Price = Price;
     }
 
     public int getId() {
@@ -33,6 +35,16 @@ public class Lesson {
     public void setId(int id) {
         this.id = id;
     }
+
+    public double getPrice() {
+        return Price;
+    }
+
+    public void setPrice(double Price) {
+        this.Price = Price;
+    }
+    
+    
 
     public LessonType getType() {
         return type;

@@ -10,14 +10,18 @@ package dsm.models;
  * @author leo-r
  */
 public class Payment {
+
     private int id;
-    private Student student;
+    private Registration registration;
     private double value;
-    private boolean isInstallment;  
-    
-    public Payment(int id, Student student, double value, boolean isInstallment) {
+    private boolean isInstallment;
+
+    public Payment() {
+    }
+
+    public Payment(int id, Registration registration, double value, boolean isInstallment) {
         this.id = id;
-        this.student = student;
+        this.registration = registration;
         this.value = value;
         this.isInstallment = isInstallment;
     }
@@ -30,12 +34,12 @@ public class Payment {
         this.id = id;
     }
 
-    public Student getStudent() {
-        return student;
+    public Registration getRegistration() {
+        return registration;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setRegistration(Registration registration) {
+        this.registration = registration;
     }
 
     public double getValue() {
@@ -53,6 +57,5 @@ public class Payment {
     public void setIsInstallment(boolean isInstallment) {
         this.isInstallment = isInstallment;
     }
-    
-    
+
 }

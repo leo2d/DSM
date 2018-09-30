@@ -5,8 +5,10 @@
  */
 package dsm.controllers;
 
+import dsm.contracts.ICommander;
+import dsm.controllers.actions.*;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,35 +17,34 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author leo-r
+ * @author Leonardo
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/Home", "/home"})
-public class HomeController extends HttpServlet {
+@WebServlet(name = "CentralController", urlPatterns = {"/CentralController", "/Central", "/Ctrl", "",})
+public class CentralController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    static HashMap<String, ICommander> actions = new HashMap<>();
+
+    static {
+        actions.put(null, new HomeViewAction());
+        actions.put("", new HomeViewAction());
+        actions.put("home", new HomeViewAction());
+        actions.put("login", new LoginViewAction());
+        actions.put("preregistration", new PreregistrationViewAction());
+        actions.put("studentRegistration", new StudentRegistrationViewAction());
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HomeController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HomeController at " + request.getContextPath() + "</h1>");
-            out.println("<p>batata</p>");
-            out.println("</body>");
-            out.println("</html>");
+        String action = request.getParameter("ac");
+
+        try {
+            if (!actions.containsKey(action)) {
+                response.getWriter().print("<h1>ERRO: </h1><h2>Ação não Encontrada</h2>");
+            }
+            actions.get(action).execute(request, response);
+        } catch (Exception ex) {
+            response.getWriter().print("<h1>ERRO: </h1><h2>" + ex.getMessage() + "</h2>");
         }
     }
 

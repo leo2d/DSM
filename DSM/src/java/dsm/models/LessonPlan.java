@@ -10,14 +10,18 @@ package dsm.models;
  * @author leo-r
  */
 public class LessonPlan {
+
     private int id;
-    private Student student;
+    private Registration registration;
     private int theoretical;//quantidade de aulas teoricas
     private int pratical;
 
-    public LessonPlan(int id, Student student, int theoretical, int pratical) {
+    public LessonPlan() {
+    }
+    
+    public LessonPlan(int id, Registration registration, int theoretical, int pratical) {
         this.id = id;
-        this.student = student;
+        this.registration = registration;
         this.theoretical = theoretical;
         this.pratical = pratical;
     }
@@ -30,12 +34,12 @@ public class LessonPlan {
         this.id = id;
     }
 
-    public Student getStudent() {
-        return student;
+    public Registration getRegistration() {
+        return registration;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setRegistration(Registration registration) {
+        this.registration = registration;
     }
 
     public int getTheoretical() {
@@ -53,6 +57,6 @@ public class LessonPlan {
     public void setPratical(int pratical) {
         this.pratical = pratical;
     }
-    
+
     
 }

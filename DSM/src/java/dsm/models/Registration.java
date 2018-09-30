@@ -5,20 +5,14 @@
  */
 package dsm.models;
 
-import dsm.enums.UserProfile;
-import javax.persistence.*;
-
 /**
  *
- * @author leo-r
+ * @author Leonardo
  */
-@Entity
-public class Student extends User{
+public class Registration {
 
-    private String email;
-    private String address;
-
-    public Student() {
-    }
-    
+    private int id;
+    private Student student;
+    private LessonPlan lessonPlan;
+    private Payment payment;
 }
