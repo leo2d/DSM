@@ -6,6 +6,7 @@
 package dsm.dao;
 
 import dsm.dao.contracts.IGenericDAO;
+import dsm.dao.contracts.IUserDAO;
 import dsm.models.*;
 import java.util.*;
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import javax.persistence.*;
  *
  * @author Leonardo
  */
-public class StudentDAO implements IGenericDAO<Student> {
+public class StudentDAO implements IGenericDAO<Student>, IUserDAO<Student> {
 
     @Override
     public void delete(Student entity) {
@@ -74,6 +75,7 @@ public class StudentDAO implements IGenericDAO<Student> {
         }
     }
 
+    @Override
     public Student getByUserId(int id) {
         EntityManager em = null;
         try {
@@ -87,7 +89,7 @@ public class StudentDAO implements IGenericDAO<Student> {
             q.setParameter("id", temp);
 
             Student student = (Student) q.getSingleResult();
-            
+
             return student;
         } catch (NoResultException e) {
             return null;

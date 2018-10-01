@@ -15,7 +15,7 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
         <link rel="stylesheet" type="text/css" href="src/css/mycustomcss.css">
-        
+
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <style type="text/css">
             header,
@@ -66,15 +66,22 @@
     </head>
 
     <body>
-        <c:if test="${sessionScope.user == null}"> 
+        <c:if test="${sessionScope.user != null}"> 
             <ul id="slide-out" class="side-nav fixed z-depth-2">
                 <li class="center no-padding">
                     <div class="indigo darken-2 white-text" style="height: 180px;">
                         <div class="row">
-                            <img style="margin-top: 5%;" width="100" height="100" src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463990208/photo_dkkrxc.png" class="circle responsive-img" />
-
+                            <!--<img style="margin-top: 5%;" width="100" height="100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxRPdeOoDtViYUO-mSfj0uru_2vB1Qy7x0tICoto5wvizhcffv" class="circle responsive-img" />-->
+                            
+                            <c:if test="${sessionScope.user.profile == 'EMPLOYEE'}"> 
+                                <img style="margin-top: 5%;" width="100" height="100" src="https://uploads.disquscdn.com/images/43ea0a469e1678fa402ad1530af321fc59c882f0811d5fa1eae6c72511a45a28.jpg" class="circle responsive-img" />
+                            </c:if>
+                            <c:if test="${sessionScope.user.profile == 'STUDENT'}"> 
+                                <img style="margin-top: 5%;" width="100" height="100" src="https://uploads.disquscdn.com/images/eaff8171edfd4ef701b008a12ed51da8854b0338e3ed488eba021d8d8fa81553.jpg" class="circle responsive-img" />
+                            </c:if>
                             <p style="margin-top: -13%;">
                                 <c:if test="${sessionScope.user != null}"> 
+                                    ${sessionScope.user.login}
                                 </c:if>
                                 <c:if test="${sessionScope.user == null}">
                                     User Batata Frita
@@ -152,8 +159,8 @@
             <header>
                 <c:if test="${sessionScope.user != null}">
                     <ul class="dropdown-content" id="user_dropdown">
-                        <li><a class="indigo-text" href="#!">Profile</a></li>
-                        <li><a class="indigo-text" href="#!">Logout</a></li>
+                        <li><a class="indigo-text" href="#!">Perfil</a></li>
+                        <li><a class="indigo-text" href="?ac=logout">Logout</a></li>
                     </ul>
                 </c:if>
 
@@ -164,12 +171,12 @@
                         <c:if test="${sessionScope.user != null}">
                             <ul class="right hide-on-med-and-down">
                                 <li>
-                                    <a class='right dropdown-button' href='' data-activates='user_dropdown'><i class=' material-icons'>account_circle</i></a>
+                                    <a class='right dropdown-button' href='' data-activates='user_dropdown'><i class='medium material-icons'>account_circle</i></a>
                                 </li>
                             </ul>
                         </c:if>
                         <c:if test="${sessionScope.user == null}">
-                            <a href="?ac=login" style="margin-top: 2em; margin-right: 3em;" class="right waves-effect waves-lighten pink btn-large"><i class='material-icons left'>account_circle</i> Login</a>
+                            <a href="?ac=loginPage" style="margin-top: 2em; margin-right: 3em;" class="right waves-effect waves-lighten pink btn-large"><i class='material-icons left'>account_circle</i> Login</a>
                             <a href="?ac=preregistration" style="margin-top: 2em; margin-right: 3em;" class="right waves-effect waves-lighten pink btn-large"><i class='material-icons left'>person_add</i> Pré-Matricula</a>
                         </c:if>
                         <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
