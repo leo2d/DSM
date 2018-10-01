@@ -28,7 +28,9 @@ public class CentralController extends HttpServlet {
         actions.put(null, new HomeViewAction());
         actions.put("", new HomeViewAction());
         actions.put("home", new HomeViewAction());
-        actions.put("login", new LoginViewAction());
+        actions.put("loginPage", new LoginViewAction());
+        actions.put("login", new LoginAction());
+        actions.put("logout", new LogoutAction());
         actions.put("preregistration", new PreregistrationViewAction());
         actions.put("studentRegistration", new StudentRegistrationViewAction());
         actions.put("saveStudent", new SaveStudentAction());
