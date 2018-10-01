@@ -1,0 +1,103 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dsm.dao;
+
+import dsm.dao.contracts.IGenericDAO;
+import dsm.models.*;
+import java.util.*;
+import javax.persistence.*;
+
+/**
+ *
+ * @author Leonardo
+ */
+public class StudentDAO implements IGenericDAO<Student> {
+
+    @Override
+    public void delete(Student entity) {
+        throw new UnsupportedOperationException("ainda nao implementei esse cara"); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(Student entity) {
+        EntityManager em = null;
+        try {
+            em = open();
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    @Override
+    public void create(Student entity) {
+        EntityManager em = null;
+        try {
+            em = open();
+            em.getTransaction().begin();
+            em.persist(entity);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("e");
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    @Override
+    public List<Student> getAll() {
+        throw new UnsupportedOperationException("ainda nao implementei esse cara"); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Student getById(int id) {
+        EntityManager em = null;
+        try {
+            em = open();
+
+            return em.getReference(Student.class, id);
+        } catch (Exception e) {
+            return null;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public Student getByUserId(int id) {
+        EntityManager em = null;
+        try {
+            em = open();
+            String jpql = "select s from Student s "
+                    + " where s.user = :id";
+
+            User temp = new User();
+            temp.setId(id);
+            Query q = em.createQuery(jpql);
+            q.setParameter("id", temp);
+
+            Student student = (Student) q.getSingleResult();
+            
+            return student;
+        } catch (NoResultException e) {
+            return null;
+        } catch (NonUniqueResultException e) {
+            return null;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+}
