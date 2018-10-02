@@ -34,6 +34,8 @@ public class CentralController extends HttpServlet {
         actions.put("preregistration", new PreregistrationViewAction());
         actions.put("studentRegistration", new StudentRegistrationViewAction());
         actions.put("saveStudent", new SaveStudentAction());
+        actions.put("createLesson", new CreateLessonViewAction());
+        actions.put("getStudentsAjax", new StudentsAjaxAction());
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +49,7 @@ public class CentralController extends HttpServlet {
             }
             actions.get(action).execute(request, response);
         } catch (Exception ex) {
-            response.getWriter().print("<h1>ERRO: </h1><h2>" + ex.getMessage() + "</h2>");
+            response.getWriter().print("<h1>ERROR: </h1><h2>" + ex.getMessage() + "</h2>");
         }
     }
 

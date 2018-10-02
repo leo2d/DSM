@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface IRegistrationDAO{
     List<Registration> getByStudentId(int id);
+    List<Registration> getByStudentName(String name);
     List<Registration> getWithLessons();
    
 }
