@@ -7,9 +7,11 @@ package dsm.dao;
 
 import dsm.dao.contracts.IGenericDAO;
 import dsm.dao.contracts.IRegistrationDAO;
+import dsm.models.Instructor;
 import dsm.models.Registration;
 import dsm.models.Student;
 import dsm.models.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -77,7 +79,7 @@ public class RegistrationDAO implements IGenericDAO<Registration>, IRegistration
             em = open();
             String jpql = "select r from Registration r "
                     + " where r.student = :stu ";
-            
+
             Student s = new Student();
             s.setId(id);
             Query q = em.createQuery(jpql);
@@ -111,6 +113,36 @@ public class RegistrationDAO implements IGenericDAO<Registration>, IRegistration
             return null;
         } catch (NonUniqueResultException e) {
             return null;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    @Override
+    public List<Registration> getByStudentName(String name) {
+        EntityManager em = null;
+        try {
+            em = open();
+            String jpql = "SELECT r FROM Registration r "
+                    + " INNER JOIN Student s ON r.student_id = s.student_id "
+                    + " WHERE s.name LIKE :name ";
+
+            String sql = "SELECT * FROM tb_registration r "
+                    + " INNER JOIN tb_student s ON r.student_id = s.student_id "
+                    + " WHERE s.student_name LIKE '%" + name + "%' ";
+
+            Query q = em.createNativeQuery(sql, Registration.class);
+            //Query q = em.createQuery(jpql);
+            // q.setParameter("name", "%" + name + "%");
+
+            List<Registration> result = (List<Registration>) q.getResultList();
+            return q.getResultList();
+        } catch (NoResultException e) {
+            return new ArrayList<Registration>();
+        } catch (NonUniqueResultException e) {
+            return new ArrayList<Registration>();
         } finally {
             if (em != null) {
                 em.close();

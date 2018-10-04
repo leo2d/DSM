@@ -99,30 +99,32 @@
                         <div id="dash_users_body" class="collapsible-body">
                             <ul>
                                 <li id="users_seller">
-                                    <a class="waves-effect" style="text-decoration: none;" href="?ac=studentRegistration">Cadastrar novo</a>
+                                    <a class="waves-effect" style="text-decoration: none;" href="?ac=studentRegistration">Cadastrar</a>
                                 </li>
 
                                 <li id="users_customer">
-                                    <a class="waves-effect" style="text-decoration: none;" href="#!">Customer</a>
+                                    <a class="waves-effect" style="text-decoration: none;" href="#!">Outra Opcao</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
                     <li id="dash_products">
-                        <div id="dash_products_header" class="collapsible-header waves-effect"><b>Products</b></div>
+                        <div id="dash_products_header" class="collapsible-header waves-effect"><b>Aulas</b></div>
                         <div id="dash_products_body" class="collapsible-body">
                             <ul>
                                 <li id="products_product">
-                                    <a class="waves-effect" style="text-decoration: none;" href="#!">Products</a>
-                                    <a class="waves-effect" style="text-decoration: none;" href="#!">Orders</a>
+                                    <a class="waves-effect" style="text-decoration: none;" href="#!">Cadastrar</a>
+                                    <a class="waves-effect" style="text-decoration: none;" href="#!">Pesquisar</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
-                    <li id="dash_categories">
-                        <div id="dash_categories_header" class="collapsible-header waves-effect"><b>Categories</b></div>
+                     <li id="dash_dashboard"><a class="waves-effect" href="?ac=logout"><b>Sair</b></a></li>
+                    
+<!--                    <li id="dash_categories">
+                        <div id="dash_categories_header" class="collapsible-header waves-effect"><b><a href="?ac=logout">Sair</a></b></div>
                         <div id="dash_categories_body" class="collapsible-body">
                             <ul>
                                 <li id="categories_category">
@@ -134,22 +136,9 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li>-->
 
-                    <li id="dash_brands">
-                        <div id="dash_brands_header" class="collapsible-header waves-effect"><b>Brands</b></div>
-                        <div id="dash_brands_body" class="collapsible-body">
-                            <ul>
-                                <li id="brands_brand">
-                                    <a class="waves-effect" style="text-decoration: none;" href="#!">Brand</a>
-                                </li>
-
-                                <li id="brands_sub_brand">
-                                    <a class="waves-effect" style="text-decoration: none;" href="#!">Sub Brand</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                   
                 </ul>
             </ul>
             <div class="left-content">
