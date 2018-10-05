@@ -58,7 +58,18 @@ public class InstructorDAO implements IGenericDAO<Instructor>, IUserDAO<Instruct
 
     @Override
     public Instructor getById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = null;
+        try {
+            em = open();
+
+            return em.getReference(Instructor.class, id);
+        } catch (Exception e) {
+            return null;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     @Override

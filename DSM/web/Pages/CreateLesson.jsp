@@ -38,7 +38,7 @@
 
             <div class='row'>
                 <div class='input-field col s12 space'>
-                    <select class="validate" aria-required="true" required="">
+                    <select class="validate" aria-required="true" required="" name="instructor">
                         <option disabled selected>Selecione o instrutor</option>
                         <c:forEach items="${requestScope.instructorsList}" var="i">
                             <option value="${i.id}">${i.name}</option>
@@ -48,13 +48,19 @@
                 </div>
             </div>
 
-            <h6>Data</h6>
+            <h6>Data e Horario</h6>
             <div class='row'>
-                <div class='input-field col s12 space'>
+                <div class='col s12 space'>
                     <div class="row">
-                        <!--<label for='totalValue'>Dia / mes / ano</label>-->
-                        <!--<input id="data" name="data" type="text" required class="validate"  onkeypress="formatDate()"/>-->
-                        <input type="text" name="data" OnKeyUp="formatDate(this);" maxlength="10"  class="validate" />
+                        <div class='input-field col s6'>
+                            <input type="text" name="data" OnKeyUp="formatDate(this);" maxlength="10"  class="validate" />
+                            <label for="data">Dia</label>
+                        </div>
+                        <div class='input-field col s6'>
+                            <input type="number" name="hour" OnKeyUp="" maxlength="2" min="07" max="21"  class="validate" />
+                            <label for="hour">Hora</label>
+                        </div>
+
                     </div>
                 </div>
 
@@ -63,32 +69,24 @@
                         <div class='input-field col s12'>
                             <label for='paymentMethod'> Tipo de aula </label><br>
                             <p>
-                                <input class='validate' type='radio' name='lessonType' value="teorica" id="teorica" onclick="updateValue()" />
+                                <input class='validate' type='radio' name='lessonType' id="teorica" value="THEORETICAL" />
                                 <label for='teorica'>Teórica</label>
                             </p>
                             <p>
-                                <input class='validate' type='radio' name='lessonType' value="pratica" id="pratica" onclick="updateValue()" />
+                                <input class='validate' type='radio' name='lessonType' id="pratica" value="PRATICAL" />
                                 <label for='pratica'>Pratica</label>
                             </p>
                         </div>
                     </div>
-                    <div class='row'>
-                        <div class='input-field col s12'>
-                            <div>
-                                <label for='totalValue'>Valor</label><br><br>
-                                <input type="text" name="value" id="money" class="money" readonly  />
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
+                <br>
                 <div>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="studentSearch" type="text" data-length="10">
-                            <label for="studentSearch">Procurar aluno</label>
+                            <label for="studentSearch">Procurar aluno (OPCIONAL)</label>
                         </div>
-                        <button class="waves-effect waves-light btn-small" onclick="getStudens()">Buscar</button>
+                        <a class="waves-effect waves-light btn-small" onclick="getStudens()">Buscar</a>
                     </div>
 
                     <div id="searchResult">
@@ -99,7 +97,7 @@
                 <br />
                 <div class="btn-save">
                     <div class='row' style="display: flex; justify-content: space-between">
-                        <button type='submit' name='btnPreRegister'  class=' space col s12 btn btn-large waves-effect indigo'>Cadastrar aula</button>
+                        <button type='submit' name='saveLesson' vlaue="save" class=' space col s12 btn btn-large waves-effect indigo'>Cadastrar aula</button>
                         <a href='?=' class=' space col s12 btn btn-large waves-effect pink'>Cancelar</a>
                     </div>
                 </div>
@@ -116,7 +114,7 @@
 <script>
     const getStudens = () => {
         let name = document.getElementById("studentSearch").value;
-         let data = {
+        let data = {
             name: name
         };
         $.ajax({

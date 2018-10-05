@@ -79,8 +79,6 @@ public class SaveStudentAction implements ICommander {
             }
         }
 
-        request.setAttribute("info", "Salvo Com Sucesso");
-        request.setAttribute("jsAlertAtivo", true);
 
         new LoginViewAction().execute(request, response);
     }

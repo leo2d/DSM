@@ -37,17 +37,28 @@ public class Registration implements Serializable {
 
     @OneToMany(mappedBy = "registration")
     private List<Lesson> lessons;
+    
+    private boolean wasApproved;
 
     public Registration() {
         this.lessons = new ArrayList<Lesson>();
     }
 
-    public Registration(int id, Student student, LessonPlan lessonPlan, Payment payment, List<Lesson> lessons) {
+    public Registration(int id, Student student, LessonPlan lessonPlan, Payment payment, List<Lesson> lessons, boolean wasApproved) {
         this.id = id;
         this.student = student;
         this.lessonPlan = lessonPlan;
         this.payment = payment;
         this.lessons = lessons;
+        this.wasApproved = wasApproved;
+    }
+    
+    public boolean isWasApproved() {
+        return wasApproved;
+    }
+
+    public void setWasApproved(boolean wasApproved) {
+        this.wasApproved = wasApproved;
     }
 
     public int getId() {

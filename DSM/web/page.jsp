@@ -72,7 +72,7 @@
                     <div class="indigo darken-2 white-text" style="height: 180px;">
                         <div class="row">
                             <!--<img style="margin-top: 5%;" width="100" height="100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxRPdeOoDtViYUO-mSfj0uru_2vB1Qy7x0tICoto5wvizhcffv" class="circle responsive-img" />-->
-                            
+
                             <c:if test="${sessionScope.user.profile == 'EMPLOYEE'}"> 
                                 <img style="margin-top: 5%;" width="100" height="100" src="https://uploads.disquscdn.com/images/43ea0a469e1678fa402ad1530af321fc59c882f0811d5fa1eae6c72511a45a28.jpg" class="circle responsive-img" />
                             </c:if>
@@ -114,31 +114,31 @@
                         <div id="dash_products_body" class="collapsible-body">
                             <ul>
                                 <li id="products_product">
-                                    <a class="waves-effect" style="text-decoration: none;" href="#!">Cadastrar</a>
+                                    <a class="waves-effect" style="text-decoration: none;" href="?ac=createLesson">Cadastrar</a>
                                     <a class="waves-effect" style="text-decoration: none;" href="#!">Pesquisar</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
-                     <li id="dash_dashboard"><a class="waves-effect" href="?ac=logout"><b>Sair</b></a></li>
+                    <li id="dash_dashboard"><a class="waves-effect" href="?ac=logout"><b>Sair</b></a></li>
+
+                    <!--                    <li id="dash_categories">
+                                            <div id="dash_categories_header" class="collapsible-header waves-effect"><b><a href="?ac=logout">Sair</a></b></div>
+                                            <div id="dash_categories_body" class="collapsible-body">
+                                                <ul>
+                                                    <li id="categories_category">
+                                                        <a class="waves-effect" style="text-decoration: none;" href="#!">Category</a>
+                                                    </li>
                     
-<!--                    <li id="dash_categories">
-                        <div id="dash_categories_header" class="collapsible-header waves-effect"><b><a href="?ac=logout">Sair</a></b></div>
-                        <div id="dash_categories_body" class="collapsible-body">
-                            <ul>
-                                <li id="categories_category">
-                                    <a class="waves-effect" style="text-decoration: none;" href="#!">Category</a>
-                                </li>
+                                                    <li id="categories_sub_category">
+                                                        <a class="waves-effect" style="text-decoration: none;" href="#!">Sub Category</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>-->
 
-                                <li id="categories_sub_category">
-                                    <a class="waves-effect" style="text-decoration: none;" href="#!">Sub Category</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>-->
 
-                   
                 </ul>
             </ul>
             <div class="left-content">
@@ -223,6 +223,17 @@
                 $('.collapsible').collapsible();
                 $('select').material_select();
             });
+        </script>
+
+        <script>
+            <%
+                if (request.getAttribute("hasAlert") != null
+                        && ((boolean) request.getAttribute("hasAlert"))) {
+            %>
+            alert("<%= request.getAttribute("alertMessage")%>");
+            <%
+                }
+            %>
         </script>
 
     </body>

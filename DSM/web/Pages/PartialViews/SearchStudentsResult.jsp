@@ -33,7 +33,7 @@
                 <td>
                     <p>
                         <input class='validate' type='radio' name='student' value="${r.id}" id="${r.id}" />
-                        <label for='${r.student.name}'></label>
+                        <label for='${r.id}'></label>
                     </p>                    
                 </td>                    
                 <td name="idregistration" value="${r.id}">${r.id}</td>
