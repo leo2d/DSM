@@ -125,19 +125,13 @@ public class RegistrationDAO implements IGenericDAO<Registration>, IRegistration
         EntityManager em = null;
         try {
             em = open();
-            String jpql = "SELECT r FROM Registration r "
-                    + " INNER JOIN Student s ON r.student_id = s.student_id "
-                    + " WHERE s.name LIKE :name ";
 
             String sql = "SELECT * FROM tb_registration r "
                     + " INNER JOIN tb_student s ON r.student_id = s.student_id "
                     + " WHERE s.student_name LIKE '%" + name + "%' ";
 
             Query q = em.createNativeQuery(sql, Registration.class);
-            //Query q = em.createQuery(jpql);
-            // q.setParameter("name", "%" + name + "%");
 
-            List<Registration> result = (List<Registration>) q.getResultList();
             return q.getResultList();
         } catch (NoResultException e) {
             return new ArrayList<Registration>();

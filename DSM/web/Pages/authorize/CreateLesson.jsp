@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<title>Cadastro de aula</title>
 <style>
     .space{
         margin-left: 50px;
@@ -30,7 +31,7 @@
     <div class="section"></div>
 
     <div class="container">
-        <form class="col s12" method="post" action="?ac=addLesson">
+        <form class="col s12" method="post" action="?ac=authorize-addLesson">
             <div class='row'>
                 <div class='col s12'>
                 </div>
@@ -98,7 +99,7 @@
                 <div class="btn-save">
                     <div class='row' style="display: flex; justify-content: space-between">
                         <button type='submit' name='saveLesson' vlaue="save" class=' space col s12 btn btn-large waves-effect indigo'>Cadastrar aula</button>
-                        <a href='?=' class=' space col s12 btn btn-large waves-effect pink'>Cancelar</a>
+                        <a href='?ac=authorize-home' class=' space col s12 btn btn-large waves-effect pink'>Cancelar</a>
                     </div>
                 </div>
         </form>
@@ -118,7 +119,7 @@
             name: name
         };
         $.ajax({
-            url: '?ac=getStudentsAjax',
+            url: '?ac=authorize-getStudentsAjax',
             type: 'Post',
             data: data,
 

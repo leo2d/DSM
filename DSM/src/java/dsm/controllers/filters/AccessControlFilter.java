@@ -6,6 +6,8 @@
 package dsm.controllers.filters;
 
 import dsm.controllers.actions.LoginViewAction;
+import dsm.enums.UserProfile;
+import dsm.models.User;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -28,25 +30,25 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebFilter(filterName = "AccessControlFilter", urlPatterns = {"/*"})
 public class AccessControlFilter implements Filter {
-    
+
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
-    
+
     public AccessControlFilter() {
-    }    
-    
+    }
+
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
             log("AccessControlFilter:DoBeforeProcessing");
         }
-     
-    }    
-    
+
+    }
+
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
@@ -58,50 +60,27 @@ public class AccessControlFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        
-                HttpServletRequest req = (HttpServletRequest) request;
+
+        HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        if (req.getParameter("ac")!= null && 
-                req.getParameter("ac").contains("Secured") ) {
-            //teste se tem alguém logado
-            if (req.getSession().getAttribute("user") == null){
-                try {
+        if (req.getParameter("ac") != null
+                && req.getParameter("ac").contains("authorize")) {
+
+            User user = (User) req.getSession().getAttribute("user");
+            try {
+                if (user == null) {
                     new LoginViewAction().execute(req, resp);
-                } catch (Exception ex) {
-                    Logger.getLogger(AccessControlFilter.class.getName()).log(Level.SEVERE, null, ex);
+                } else if (user.getProfile() != UserProfile.ADMIN && user.getProfile() != UserProfile.EMPLOYEE) {
+                    new LoginViewAction().execute(req, resp);
+                } else {
+                    chain.doFilter(request, response);
                 }
-            }else{
-                chain.doFilter(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(AccessControlFilter.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             chain.doFilter(request, response);
         }
-//        if (debug) {
-//            log("AccessControlFilter:doFilter()");
-//        }
-//        
-//        doBeforeProcessing(request, response);
-//        
-//        Throwable problem = null;
-//        try {
-//            chain.doFilter(request, response);
-//        } catch (Throwable t) {
-//          
-//            problem = t;
-//            t.printStackTrace();
-//        }
-//        
-//        doAfterProcessing(request, response);
-//
-//        if (problem != null) {
-//            if (problem instanceof ServletException) {
-//                throw (ServletException) problem;
-//            }
-//            if (problem instanceof IOException) {
-//                throw (IOException) problem;
-//            }
-//            sendProcessingError(problem, response);
-//        }
     }
 
     public FilterConfig getFilterConfig() {
@@ -112,13 +91,13 @@ public class AccessControlFilter implements Filter {
         this.filterConfig = filterConfig;
     }
 
-    public void destroy() {        
+    public void destroy() {
     }
 
-    public void init(FilterConfig filterConfig) {        
+    public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {                
+            if (debug) {
                 log("AccessControlFilter:Initializing filter");
             }
         }
@@ -134,20 +113,20 @@ public class AccessControlFilter implements Filter {
         sb.append(")");
         return (sb.toString());
     }
-    
+
     private void sendProcessingError(Throwable t, ServletResponse response) {
-        String stackTrace = getStackTrace(t);        
-        
+        String stackTrace = getStackTrace(t);
+
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);                
+                PrintWriter pw = new PrintWriter(ps);
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
                 // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");                
-                pw.print(stackTrace);                
+                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
+                pw.print(stackTrace);
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
@@ -164,7 +143,7 @@ public class AccessControlFilter implements Filter {
             }
         }
     }
-    
+
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -178,9 +157,9 @@ public class AccessControlFilter implements Filter {
         }
         return stackTrace;
     }
-    
+
     public void log(String msg) {
-        filterConfig.getServletContext().log(msg);        
+        filterConfig.getServletContext().log(msg);
     }
-    
+
 }

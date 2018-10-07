@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<title>DSM - Home</title>
+<title>DSM - Menu</title>
 <div class="container" >
     <div class="" >
         <div class="row">
@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="row">
-                            <a href="?ac=studentRegistration">
+                            <a href="?ac=authorize-studentRegistration">
                                 <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
                                     <i class="indigo-text text-lighten-1 large material-icons">person_add</i>
                                     <span class="indigo-text text-lighten-1"><h5>Cadastro de Aluno</h5></span>
@@ -29,10 +29,10 @@
                             <div class="col s1">&nbsp;</div>
                             <div class="col s1">&nbsp;</div>
 
-                            <a href="#!">
+                            <a href="authorize-#!">
                                 <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
                                     <i class="indigo-text text-lighten-1 large material-icons">settings</i>
-                                    <span class="indigo-text text-lighten-1"><h5>Gerenciar matriculas</h5></span>
+                                    <span class="indigo-text text-lighten-1"><h5>Gerenciar provas</h5></span>
                                 </div>
                             </a>
                         </div>
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <a href="?ac=createLesson">
+                        <a href="?ac=authorize-createLesson">
                             <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
                                 <i class="indigo-text text-lighten-1 large material-icons">directions_car</i>
                                 <span class="indigo-text text-lighten-1"><h5>Cadastrar aula</h5></span>
@@ -88,7 +88,7 @@
                         <div class="col s1">&nbsp;</div>
                         <div class="col s1">&nbsp;</div>
 
-                        <a href="#!">
+                        <a href="?ac=findLessons">
                             <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
                                 <i class="indigo-text text-lighten-1 large material-icons">search</i>
                                 <span class="indigo-text text-lighten-1"><h5>Pesquisar aula</h5></span>

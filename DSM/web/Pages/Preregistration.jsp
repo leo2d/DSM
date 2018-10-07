@@ -10,6 +10,7 @@
 <html>
 
     <head>
+        <title>Pré Matricula</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
@@ -115,7 +116,7 @@
                         <div class="btn-save">
                             <div class='row' style="display: flex; justify-content: space-between">
                                 <button type='submit' name='btnPreRegister'  class=' space col s12 btn btn-large waves-effect indigo'>Salvar Pré-Matricula</button>
-                                <a href='?=' class=' space col s12 btn btn-large waves-effect pink'>Cancelar</a>
+                                <a href='?ac=login' class=' space col s12 btn btn-large waves-effect pink'>Cancelar</a>
                             </div>
                         </div>
                     </form>

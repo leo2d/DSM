@@ -19,7 +19,7 @@ public class CreateLessonViewAction implements ICommander {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        RequestDispatcher rd = request.getRequestDispatcher("page.jsp?page=CreateLesson");
+        RequestDispatcher rd = request.getRequestDispatcher("page.jsp?page=authorize/CreateLesson");
 
         request.setAttribute("instructorsList", new InstructorDAO().getAll());
 

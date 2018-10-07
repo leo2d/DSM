@@ -28,7 +28,7 @@
     <div class="container">
         <!--<div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">-->
 
-        <form class="col s12" method="post" action="?ac=saveStudent">
+        <form class="col s12" method="post" action="?ac=authorize-saveStudent">
             <div class='row'>
                 <div class='col s12'>
                 </div>
@@ -119,7 +119,7 @@
             <div class="btn-save">
                 <div class='row' style="display: flex; justify-content: space-between">
                     <button type='submit' name='btnPreRegister'  class=' space col s12 btn btn-large waves-effect indigo'>Finalizar matricula</button>
-                    <a href='?=' class=' space col s12 btn btn-large waves-effect pink'>Cancelar</a>
+                    <a href='?ac=authorize-home' class=' space col s12 btn btn-large waves-effect pink'>Cancelar</a>
                 </div>
             </div>
         </form>

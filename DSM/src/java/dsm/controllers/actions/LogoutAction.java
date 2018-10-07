@@ -18,7 +18,7 @@ public class LogoutAction implements ICommander{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.getSession().invalidate();
-        new HomeViewAction().execute(request, response);
+        new LoginViewAction().execute(request, response);
     }
     
 }

@@ -18,7 +18,7 @@ public class StudentRegistrationViewAction implements ICommander{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        RequestDispatcher rd = request.getRequestDispatcher("page.jsp?page=StudentRegistration");
+        RequestDispatcher rd = request.getRequestDispatcher("page.jsp?page=authorize/StudentRegistration");
         rd.forward(request, response);
     }
     

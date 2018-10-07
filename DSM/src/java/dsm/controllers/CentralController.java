@@ -25,18 +25,19 @@ public class CentralController extends HttpServlet {
     static HashMap<String, ICommander> actions = new HashMap<>();
 
     static {
-        actions.put(null, new HomeViewAction());
-        actions.put("", new HomeViewAction());
-        actions.put("home", new HomeViewAction());
+        actions.put(null, new LoginViewAction());
+        actions.put("", new LoginViewAction());
+        actions.put("authorize-home", new HomeViewAction());
         actions.put("loginPage", new LoginViewAction());
         actions.put("login", new LoginAction());
         actions.put("logout", new LogoutAction());
         actions.put("preregistration", new PreregistrationViewAction());
-        actions.put("studentRegistration", new StudentRegistrationViewAction());
-        actions.put("saveStudent", new SaveStudentAction());
-        actions.put("createLesson", new CreateLessonViewAction());
-        actions.put("getStudentsAjax", new StudentsAjaxAction());
-        actions.put("addLesson", new AddLessonAction());
+        actions.put("authorize-studentRegistration", new StudentRegistrationViewAction());
+        actions.put("authorize-saveStudent", new SaveStudentAction());
+        actions.put("authorize-createLesson", new CreateLessonViewAction());
+        actions.put("authorize-getStudentsAjax", new StudentsAjaxAction());
+        actions.put("authorize-addLesson", new AddLessonAction());
+        actions.put("findLessons", new SearchLessonsViewAction());
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

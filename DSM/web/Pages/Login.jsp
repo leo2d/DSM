@@ -13,8 +13,9 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
         <style>
-     
+
         </style>
+        <title>DSM - Login</title>
     </head>
 
     <body>
@@ -64,7 +65,10 @@
                         </form>
                     </div>
                 </div>
-                <a href="?ac=preregistration">Criar conta</a>
+                <div class="row">
+                    <a class="btn btn-small  light-blue lighten-3" style="margin: 10px" href="?ac=preregistration">Realizar pré Matricula</a>
+                    <a class="btn btn-small green lighten-3" style="text-decoration: none;" href="?ac=findLessons">Ver aulas livres</a>
+                </div>
             </center>
 
             <div class="section"></div>
