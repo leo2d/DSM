@@ -6,6 +6,7 @@
 package dsm.dao;
 
 import dsm.dao.contracts.IGenericDAO;
+import dsm.dao.contracts.IStudentDAO;
 import dsm.dao.contracts.IUserDAO;
 import dsm.models.*;
 import java.util.*;
@@ -15,7 +16,7 @@ import javax.persistence.*;
  *
  * @author Leonardo
  */
-public class StudentDAO implements IGenericDAO<Student>, IUserDAO<Student> {
+public class StudentDAO implements IGenericDAO<Student>, IUserDAO<Student>, IStudentDAO {
 
     @Override
     public void delete(Student entity) {
@@ -102,4 +103,25 @@ public class StudentDAO implements IGenericDAO<Student>, IUserDAO<Student> {
         }
     }
 
+    public List<Student> getByName(String name) {
+        EntityManager em = null;
+        try {
+            em = open();
+
+            String query = "SELECT s FROM Student s"
+                    + " WHERE s.name LIKE '%" + name + "%' ";
+
+            Query q = em.createQuery(query);
+
+            return q.getResultList();
+        } catch (NoResultException e) {
+            return new ArrayList<Student>();
+        } catch (NonUniqueResultException e) {
+            return new ArrayList<Student>();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
 }

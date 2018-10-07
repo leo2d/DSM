@@ -31,13 +31,15 @@ public class CentralController extends HttpServlet {
         actions.put("loginPage", new LoginViewAction());
         actions.put("login", new LoginAction());
         actions.put("logout", new LogoutAction());
+        actions.put("findLessons", new SearchLessonsViewAction());
         actions.put("preregistration", new PreregistrationViewAction());
         actions.put("authorize-studentRegistration", new StudentRegistrationViewAction());
         actions.put("authorize-saveStudent", new SaveStudentAction());
+        actions.put("saveStudent", new SaveStudentAction());
         actions.put("authorize-createLesson", new CreateLessonViewAction());
         actions.put("authorize-getStudentsAjax", new StudentsAjaxAction());
         actions.put("authorize-addLesson", new AddLessonAction());
-        actions.put("findLessons", new SearchLessonsViewAction());
+        actions.put("authorize-getPreRegisterAjax", new PreRegistrationsAjaxAction());
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
