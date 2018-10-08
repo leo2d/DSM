@@ -40,6 +40,9 @@ public class CentralController extends HttpServlet {
         actions.put("authorize-getStudentsAjax", new StudentsAjaxAction());
         actions.put("authorize-addLesson", new AddLessonAction());
         actions.put("authorize-getPreRegisterAjax", new PreRegistrationsAjaxAction());
+        actions.put("authorize-ManageTests", new ManageTestsViewAction());
+        actions.put("authorize-UpdateTestStatus", new UpdateTestStatusAction());
+        actions.put("getTestResult", new TestResultViewAction());
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

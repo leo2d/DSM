@@ -24,6 +24,7 @@
             <th></th>
             <th>Matricula</th>
             <th>Nome</th>
+            <th>Prova</th>
         </tr>
     </thead>
 
@@ -38,6 +39,7 @@
                 </td>                    
                 <td name="idregistration" value="${r.id}">${r.id}</td>
                 <td name="name">${r.student.name}</td>
+                <td name="name">${r.wasApproved ? "Aprovado" : "Reprovado"}</td>
             </tr>
         </c:forEach>
     </tbody>

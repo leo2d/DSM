@@ -31,7 +31,17 @@ public class RegistrationDAO implements IGenericDAO<Registration>, IRegistration
 
     @Override
     public void update(Registration entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = null;
+        try {
+            em = open();
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     @Override
