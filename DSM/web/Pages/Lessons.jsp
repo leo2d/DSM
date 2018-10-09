@@ -20,7 +20,7 @@
         </div>
 
     </div> <br>
-
+    <h2 class="pink-text text-accent-3"> <% request.getParameter("message"); %> </h2>
     <div class = "row">
         <c:forEach items="${requestScope.lessons}" var="lesson">
             <c:if test="${lesson.type == 'THEORETICAL'}">
