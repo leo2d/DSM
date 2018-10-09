@@ -24,7 +24,7 @@
     <div class = "row">
         <c:forEach items="${requestScope.lessons}" var="lesson">
             <c:if test="${lesson.type == 'THEORETICAL'}">
-                <div class = "col s12 m3">
+                <div class = "col s12 m4">
                     <!--<div class="card blue-grey darken-1">-->
                     <div class="card blue  waves-effect">
                         <div class="card-content white-text">
@@ -67,7 +67,7 @@
             <c:if test="${lesson.type == 'PRATICAL'}">
 
                 <%--<c:if test="${sessionScope.user.profile == 'INSTRUCTOR'}">--%>   
-                <div class = "col s12 m3">
+                <div class = "col s12 m4">
                     <!--<div class="card blue-grey darken-1">-->
                     <div class="card pink  waves-effect">
                         <div class="card-content white-text">

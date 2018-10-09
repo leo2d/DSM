@@ -101,10 +101,10 @@
 
                     <c:if test="${(sessionScope.user.profile == 'INSTRUCTOR') || (sessionScope.user.profile == 'STUDENT')}"> 
                         <li id="dash_dashboard"><a class="waves-effect" href="?ac=findLessons"><b>Aulas</b></a></li>
-                        <c:if test="${(sessionScope.user.profile == 'STUDENT')}">
+                            <c:if test="${(sessionScope.user.profile == 'STUDENT')}">
                             <li id="dash_dashboard"><a class="waves-effect" href="?ac=getTestResult"><b>Resultados de provas</b></a></li>        
+                            </c:if>
                         </c:if>
-                    </c:if>
                     <ul class="collapsible" data-collapsible="accordion">
                         <c:if test="${(sessionScope.user.profile == 'EMPLOYEE') || sessionScope.user.profile == 'ADMIN'}"> 
                             <li id="dash_dashboard"><a class="waves-effect" href="?ac=authorize-home"><b>Página Inicial</b></a></li>
