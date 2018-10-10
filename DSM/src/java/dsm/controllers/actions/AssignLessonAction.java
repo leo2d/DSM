@@ -6,8 +6,10 @@
 package dsm.controllers.actions;
 
 import dsm.contracts.ICommander;
+import dsm.dao.LessonDAO;
 import dsm.dao.RegistrationDAO;
 import dsm.enums.UserProfile;
+import dsm.models.Lesson;
 import dsm.models.Registration;
 import dsm.models.User;
 import javax.servlet.http.HttpServletRequest;
@@ -28,13 +30,24 @@ public class AssignLessonAction implements ICommander {
 
         boolean idIsValid = _request.getSession().getAttribute("registration") != null;
 
+        int lessonId = Integer.parseInt(_request.getParameter("lesson"));
+
         if (!idIsValid) {
             new SelectStudentRegistrationsViewACtion().execute(request, response);
         } else {
-//            Registration registration = new RegistrationDAO()
-//                    .getById(Integer.parseInt(_request.getParameter("registration")));
-            //   registration.getLessons().add();
-        }
-    }
+            
+            LessonDAO lessonDAO = new LessonDAO();
+            Lesson lesson = lessonDAO.getById(lessonId);
+            
+            Registration registration = (Registration) _request.getSession().getAttribute("registration");
 
+            lesson.setRegistration(registration);
+            registration.getLessons().add(lesson);
+
+            lessonDAO.update(lesson);
+            new RegistrationDAO().update(registration);
+        }
+        
+        new SearchLessonsViewAction().execute(request, response);
+    }
 }

@@ -20,7 +20,7 @@
         </div>
 
     </div> <br>
-    <h2 class="pink-text text-accent-3"> <% request.getParameter("message"); %> </h2>
+    <h2 class="pink-text text-accent-3"> <% request.getParameter("message");%> </h2>
     <div class = "row">
         <c:forEach items="${requestScope.lessons}" var="lesson">
             <c:if test="${lesson.type == 'THEORETICAL'}">
@@ -49,13 +49,13 @@
                         <!--<div class="card-action  light-blue darken-3">-->
                         <div class="card-action  blue darken-3">
                             <c:if test="${sessionScope.user.profile == 'STUDENT'}"> 
-                                <a href="#" >Pegar aula</a>
+                                <a href="?ac=assignLesson&&lesson=${lesson.id}" >Pegar aula</a>
                             </c:if>
                             <c:if test="${sessionScope.user == null}">
-                                <a href="#" >Pegar aula</a>
+                                <a href="?ac=loginPage" >Pegar aula</a>
                             </c:if>
                             <c:if test="${sessionScope.user.profile == 'EMPLOYEE'}">
-                                <a href="#" >Editar aula</a>
+                                <!--<a href="?ac=authorize-editLesson&&lesson=$/*{lesson.id}" >Editar aula</a>-->
                             </c:if>
                             <c:if test="${sessionScope.user.profile == 'INSTRUCTOR'}">
                             </c:if>
@@ -91,13 +91,13 @@
                         </div>
                         <div class="card-action   pink darken-4">
                             <c:if test="${sessionScope.user.profile == 'STUDENT'}"> 
-                                <a href="#" >Pegar aula</a>
+                                <a href="?ac=assignLesson&&lesson=${lesson.id}" >Pegar aula</a>
                             </c:if>
                             <c:if test="${sessionScope.user == null}">
-                                <a href="#" >Pegar aula</a>
+                                <a href="?ac=loginPage" >Pegar aula</a>
                             </c:if>
                             <c:if test="${sessionScope.user.profile == 'EMPLOYEE'}">
-                                <a href="#" >Editar aula</a>
+                                <!--<a href="?ac=authorize-editLesson&&lesson=$/*{lesson.id}" >Editar aula</a>-->
                             </c:if>
                             <c:if test="${sessionScope.user.profile == 'INSTRUCTOR'}">
                             </c:if>

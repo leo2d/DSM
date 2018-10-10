@@ -10,6 +10,7 @@ import dsm.dao.contracts.ILessonDAO;
 import dsm.models.Instructor;
 import dsm.models.Lesson;
 import dsm.models.Registration;
+import dsm.models.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -28,7 +29,17 @@ public class LessonDAO implements IGenericDAO<Lesson>, ILessonDAO {
 
     @Override
     public void update(Lesson entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = null;
+        try {
+            em = open();
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     @Override
@@ -68,7 +79,18 @@ public class LessonDAO implements IGenericDAO<Lesson>, ILessonDAO {
 
     @Override
     public Lesson getById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = null;
+        try {
+            em = open();
+
+            return em.getReference(Lesson.class, id);
+        } catch (Exception e) {
+            return null;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     @Override

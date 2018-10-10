@@ -46,7 +46,9 @@ public class SearchLessonsViewAction implements ICommander {
             userIsVerified = user.getProfile().equals(UserProfile.STUDENT);
         }
 
-        if (!idIsValid && userIsVerified) {
+        Registration reg = (Registration) _request.getSession().getAttribute("registration");
+
+        if (!idIsValid && userIsVerified && reg == null) {
             new SelectStudentRegistrationsViewACtion().execute(request, response);
         } else {
 
@@ -80,7 +82,10 @@ public class SearchLessonsViewAction implements ICommander {
                 Instructor instructor = new InstructorDAO().getByUserId(user.getId());
                 return instructor.getSchedule();
             } else if (user.getProfile() == UserProfile.STUDENT) {
-                Registration registration = new RegistrationDAO().getById(Integer.parseInt(_request.getParameter("registration")));
+                Registration registration = (Registration) _request.getSession().getAttribute("registration");
+                if (registration == null) {
+                    registration = new RegistrationDAO().getById(Integer.parseInt(_request.getParameter("registration")));
+                }
                 _request.getSession().setAttribute("registration", registration);
                 return GetLessonsThatRegistrationCanDo(registration);
             }

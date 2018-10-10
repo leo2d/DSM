@@ -43,7 +43,8 @@ public class CentralController extends HttpServlet {
         actions.put("authorize-ManageTests", new ManageTestsViewAction());
         actions.put("authorize-UpdateTestStatus", new UpdateTestStatusAction());
         actions.put("getTestResult", new TestResultViewAction());
-        actions.put("authorize-assignLesson", new AssignLessonAction());
+        actions.put("assignLesson", new AssignLessonAction());
+        actions.put("authorize-editLesson", new AssignLessonAction());
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
