@@ -15,6 +15,7 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
         <link rel="stylesheet" type="text/css" href="src/css/mycustomcss.css">
+<!--        <link rel="stylesheet" type="text/css" href="src/css/materialize.min.css">-->
 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <style type="text/css">
@@ -117,7 +118,7 @@
                                         </li>
 
                                         <li id="users_customer">
-                                            <a class="waves-effect" style="text-decoration: none;" href="#!">Gerenciar provas</a>
+                                            <a class="waves-effect" style="text-decoration: none;" href="?ac=authorize-ManageTests">Gerenciar provas</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -202,13 +203,14 @@
             </div>
             <div class="footer-copyright">
                 <div class="container">
-                    <span>Original Template Made By <a style='font-weight: bold;' href="https://github.com/piedcipher" target="_blank">Tirth Patel</a></span>
+                    <span>Original Base Template Made By <a style='font-weight: bold;' href="https://github.com/piedcipher" target="_blank">Tirth Patel</a></span>
                 </div>
             </div>
         </footer>
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>  
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>-->
+        <script type="text/javascript" src="src/js/materialize.min.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function () {

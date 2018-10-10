@@ -81,6 +81,7 @@ public class SearchLessonsViewAction implements ICommander {
                 return instructor.getSchedule();
             } else if (user.getProfile() == UserProfile.STUDENT) {
                 Registration registration = new RegistrationDAO().getById(Integer.parseInt(_request.getParameter("registration")));
+                _request.getSession().setAttribute("registration", registration);
                 return GetLessonsThatRegistrationCanDo(registration);
             }
 

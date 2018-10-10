@@ -155,7 +155,7 @@
         </div>
     </div>
 
-    <div class="fixed-action-btn click-to-toggle" style="bottom: 45px; right: 24px;">
+<!--    <div class="fixed-action-btn click-to-toggle" style="bottom: 45px; right: 24px;">
         <a class="btn-floating btn-large pink waves-effect waves-light">
             <i class="large material-icons">add</i>
         </a>
@@ -181,5 +181,5 @@
                 <a href="" class="btn-floating fab-tip">Add a master password</a>
             </li>
         </ul>
-    </div>
+    </div>-->
 </div>

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Leonardo
  */
-@WebServlet(name = "CentralController", urlPatterns = {"/CentralController", "/Central", "/Ctrl", "",})
+@WebServlet(name = "CentralController", urlPatterns = {"/CentralController", "/Central", "/Ctrl", ""})
 public class CentralController extends HttpServlet {
 
     static HashMap<String, ICommander> actions = new HashMap<>();
@@ -43,6 +43,7 @@ public class CentralController extends HttpServlet {
         actions.put("authorize-ManageTests", new ManageTestsViewAction());
         actions.put("authorize-UpdateTestStatus", new UpdateTestStatusAction());
         actions.put("getTestResult", new TestResultViewAction());
+        actions.put("authorize-assignLesson", new AssignLessonAction());
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

@@ -66,8 +66,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <a class="btn btn-small  light-blue lighten-3" style="margin: 10px" href="?ac=preregistration">Realizar pré Matricula</a>
-                    <a class="btn btn-small green lighten-3" style="text-decoration: none;" href="?ac=findLessons">Ver aulas livres</a>
+                    <a class="btn btn-small  ight-blue darken-4" style="margin: 10px" href="?ac=preregistration">Realizar pré Matricula</a>
+                    <a class="btn btn-small pink darken-1" style="text-decoration: none;" href="?ac=findLessons">Ver aulas livres</a>
                 </div>
             </center>
 
