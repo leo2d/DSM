@@ -5,3 +5,7 @@ This is a simple software  to manage lessons in a driver school.
 Get db in db folder
 Use Tomcat 8 
 
+# Persistence Details
+Mysql
+EclipseLink
+
