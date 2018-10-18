@@ -58,12 +58,45 @@ public class InstructorDAO implements IGenericDAO<Instructor>, IUserDAO<Instruct
 
     @Override
     public Instructor getById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = null;
+        try {
+            em = open();
+
+            return em.getReference(Instructor.class, id);
+        } catch (Exception e) {
+            return null;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     @Override
     public Instructor getByUserId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = null;
+        try {
+            em = open();
+            String jpql = "select s from Instructor s "
+                    + " where s.user = :id";
+
+            User temp = new User();
+            temp.setId(id);
+            Query q = em.createQuery(jpql);
+            q.setParameter("id", temp);
+
+            Instructor instructor = (Instructor) q.getSingleResult();
+
+            return instructor;
+        } catch (NoResultException e) {
+            return null;
+        } catch (NonUniqueResultException e) {
+            return null;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
 }

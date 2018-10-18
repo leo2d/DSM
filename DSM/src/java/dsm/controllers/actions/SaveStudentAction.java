@@ -25,67 +25,88 @@ public class SaveStudentAction implements ICommander {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         this._request = request;
+        StudentDAO sdao = new StudentDAO();
+        Student student = null;
 
-        int id = parameterIsValid("id") ? Integer.parseInt(request.getParameter("id")) : 0;
+        int id = parameterIsValid("student") ? Integer.parseInt(request.getParameter("student")) : 0;
 
-        User user = new User(id, request.getParameter("login"), request.getParameter("password"), UserProfile.STUDENT);
+        if (id != 0) {
+            student = sdao.getById(id);
+        } else if (student == null || id == 0) {
+            User user = CreateUser();
 
-        UserDAO userDAO = new UserDAO();
-        userDAO.create(user);
-
-        user = userDAO.getByLoginAndPassword(user.getLogin(), user.getPassword());
-
-        if (parameterIsValid("name")) {
-            Student student = new Student();
-            student.setName(request.getParameter("name"));
-            student.setAddress(request.getParameter("address"));
-            student.setEmail(request.getParameter("email"));
-            student.setUser(user);
-
-            StudentDAO sdao = new StudentDAO();
-            sdao.create(student);
-            
-            student = sdao.getByUserId(student.getUser().getId());
-            if (parameterIsValid("payment")) {
-
-                LessonPlan plan = new LessonPlan();
-                plan.setPratical(parameterIsValid("pratica") ? Integer.parseInt(request.getParameter("pratica")) : 0);
-                plan.setTheoretical(parameterIsValid("teorica") ? Integer.parseInt(request.getParameter("teorica")) : 0);
-                
-                new LessonPlanDAO().create(plan);
-
-                Payment payment = new Payment();
-                String value = request.getParameter("value").replace("R$", "");
-                payment.setValue(Double.parseDouble(value));
-                payment.setIsInstallment(request.getParameter("payment").equals("parcelado"));
-                
-                new PaymentDAO().create(payment);
-
-                Registration registration = new Registration();
-                registration.setLessonPlan(plan);
-                registration.setPayment(payment);
-                registration.setStudent(student);
-                
-                RegistrationDAO rdao = new RegistrationDAO();
-                rdao.create(registration);
-                
-                payment.setRegistration(registration);
-                plan.setRegistration(registration);
-                
-                List<Registration> regs = rdao.getByStudentId(registration.getStudent().getId());
-                
-                student.setRegistrations(regs);
-                sdao.update(student);
+            if (parameterIsValid("name")) {
+                student = CreateStudent(user);
+                sdao.create(student);
+                student = sdao.getByUserId(student.getUser().getId());
             }
         }
 
-        request.setAttribute("info", "Salvo Com Sucesso");
-        request.setAttribute("jsAlertAtivo", true);
+        if (parameterIsValid("payment")) {
 
-        new LoginViewAction().execute(request, response);
+            LessonPlan plan = new LessonPlan();
+            plan.setPratical(parameterIsValid("pratica") ? Integer.parseInt(request.getParameter("pratica")) : 0);
+            plan.setTheoretical(parameterIsValid("teorica") ? Integer.parseInt(request.getParameter("teorica")) : 0);
+
+            new LessonPlanDAO().create(plan);
+
+            Payment payment = new Payment();
+            String value = request.getParameter("value").replace("R$", "");
+            payment.setValue(Double.parseDouble(value));
+            payment.setIsInstallment(request.getParameter("payment").equals("parcelado"));
+
+            new PaymentDAO().create(payment);
+
+            Registration registration = CreateNewRegistration(student, plan, payment);
+
+            payment.setRegistration(registration);
+            plan.setRegistration(registration);
+
+            List<Registration> regs = new RegistrationDAO().getByStudentId(registration.getStudent().getId());
+
+            student.setRegistrations(regs);
+            sdao.update(student);
+        }
+
+        if (request.getSession().getAttribute("user") != null) {
+            new HomeViewAction().execute(request, response);
+        } else {
+            new LoginViewAction().execute(request, response);
+        }
     }
 
     private boolean parameterIsValid(String parameterName) {
         return _request.getParameter(parameterName) != null && !_request.getParameter(parameterName).isEmpty();
+    }
+
+    private User CreateUser() {
+        User user = new User(0, _request.getParameter("login"), _request.getParameter("password"), UserProfile.STUDENT);
+        UserDAO userDAO = new UserDAO();
+        userDAO.create(user);
+        user = userDAO.getByLoginAndPassword(user.getLogin(), user.getPassword());
+
+        return user;
+    }
+
+    private Student CreateStudent(User user) {
+        Student student = student = new Student();
+        student.setName(_request.getParameter("name"));
+        student.setAddress(_request.getParameter("address"));
+        student.setEmail(_request.getParameter("email"));
+        student.setUser(user);
+
+        return student;
+    }
+
+    private Registration CreateNewRegistration(Student student, LessonPlan plan, Payment payment) {
+        Registration registration = new Registration();
+        registration.setLessonPlan(plan);
+        registration.setPayment(payment);
+        registration.setStudent(student);
+
+        RegistrationDAO rdao = new RegistrationDAO();
+        rdao.create(registration);
+
+        return registration;
     }
 }

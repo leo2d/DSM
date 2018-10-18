@@ -18,7 +18,7 @@ public class HomeViewAction implements ICommander{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        RequestDispatcher rd = request.getRequestDispatcher("page.jsp?page=Home");
+        RequestDispatcher rd = request.getRequestDispatcher("page.jsp?page=authorize/Home");
         rd.forward(request, response);
     }
     

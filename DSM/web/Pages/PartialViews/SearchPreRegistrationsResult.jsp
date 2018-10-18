@@ -1,18 +1,7 @@
 <%-- 
-    Document   : SearchStudentsResult
-    Created on : Oct 2, 2018, 11:35:51 AM
+    Document   : SearchPreRegistrationsResult
+    Created on : Oct 6, 2018, 11:41:29 PM
     Author     : Leonardo
-
---%>
-<%--
-<c:forEach items="${requestScope.result}" var="i">
-            <c:forEach items="${i.registration}" var="r">
-                <tr>
-                    <td name="idregistration" value="${i.idregistration}">${r.idregistration}</td>
-                    <td name="name">${i.name}</td>
-                </tr>
-            </c:forEach>
-        </c:forEach>
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -22,9 +11,9 @@
     <thead>
         <tr>
             <th></th>
-            <th>Matricula</th>
+            <th>Código</th>
             <th>Nome</th>
-            <th>Prova</th>
+            <th>Email</th>
         </tr>
     </thead>
 
@@ -38,8 +27,8 @@
                     </p>                    
                 </td>                    
                 <td name="idregistration" value="${r.id}">${r.id}</td>
-                <td name="name">${r.student.name}</td>
-                <td name="name">${r.wasApproved ? "Aprovado" : "Reprovado"}</td>
+                <td name="name">${r.name}</td>
+                <td name="name">${r.email}</td>
             </tr>
         </c:forEach>
     </tbody>

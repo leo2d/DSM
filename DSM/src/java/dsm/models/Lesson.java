@@ -27,7 +27,7 @@ public class Lesson implements Serializable {
     @Column(name = "lesson_type")
     private LessonType type;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "lesson_date")
     private Date lessonDate;
 

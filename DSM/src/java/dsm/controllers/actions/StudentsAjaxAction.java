@@ -8,7 +8,8 @@ package dsm.controllers.actions;
 import dsm.contracts.ICommander;
 import dsm.dao.InstructorDAO;
 import dsm.dao.RegistrationDAO;
-import dsm.models.Registration;
+import dsm.models.*;
+import java.util.*;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ public class StudentsAjaxAction implements ICommander {
 
         String name = request.getParameter("name");
         List<Registration> result = new RegistrationDAO().getByStudentName(name);
+        
         request.setAttribute("result", result);
 
         rd.forward(request, response);

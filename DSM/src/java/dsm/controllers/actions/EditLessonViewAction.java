@@ -6,7 +6,8 @@
 package dsm.controllers.actions;
 
 import dsm.contracts.ICommander;
-import dsm.dao.InstructorDAO;
+import dsm.dao.LessonDAO;
+import dsm.models.Lesson;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,15 +16,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Leonardo
  */
-public class CreateLessonViewAction implements ICommander {
+public class EditLessonViewAction implements ICommander {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        RequestDispatcher rd = request.getRequestDispatcher("page.jsp?page=authorize/CreateLesson");
 
-        request.setAttribute("instructorsList", new InstructorDAO().getAll());
+        int lessonId = Integer.parseInt(request.getParameter("lesson"));
 
+        Lesson lesson = new LessonDAO().getById(lessonId);
+
+        request.setAttribute("Selectedlesson", lesson);
+
+        RequestDispatcher rd = request.getRequestDispatcher("page.jsp?page=authorize/EditLesson");
         rd.forward(request, response);
+
     }
 
 }

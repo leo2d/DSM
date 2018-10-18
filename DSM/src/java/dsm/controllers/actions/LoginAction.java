@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dsm.models.*;
 import dsm.dao.*;
+import dsm.enums.UserProfile;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -44,7 +45,12 @@ public class LoginAction implements ICommander {
 
             request.getSession().setAttribute("user", user);
             HttpSession httpSession = request.getSession();
-            new HomeViewAction().execute(request, response);
+
+            if (user.getProfile() == UserProfile.ADMIN || user.getProfile() == UserProfile.EMPLOYEE) {
+                new HomeViewAction().execute(request, response);
+            } else {
+                new SearchLessonsViewAction().execute(request, response);
+            }
         }
     }
 

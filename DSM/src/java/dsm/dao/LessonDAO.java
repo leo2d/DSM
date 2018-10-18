@@ -6,31 +6,29 @@
 package dsm.dao;
 
 import dsm.dao.contracts.IGenericDAO;
-import dsm.dao.contracts.IRegistrationDAO;
+import dsm.dao.contracts.ILessonDAO;
 import dsm.models.Instructor;
+import dsm.models.Lesson;
 import dsm.models.Registration;
-import dsm.models.Student;
 import dsm.models.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 
 /**
  *
  * @author Leonardo
  */
-public class RegistrationDAO implements IGenericDAO<Registration>, IRegistrationDAO {
+public class LessonDAO implements IGenericDAO<Lesson>, ILessonDAO {
 
     @Override
-    public void delete(Registration entity) {
+    public void delete(Lesson entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Registration entity) {
+    public void update(Lesson entity) {
         EntityManager em = null;
         try {
             em = open();
@@ -45,7 +43,7 @@ public class RegistrationDAO implements IGenericDAO<Registration>, IRegistration
     }
 
     @Override
-    public void create(Registration entity) {
+    public void create(Lesson entity) {
         EntityManager em = null;
         try {
             em = open();
@@ -62,17 +60,30 @@ public class RegistrationDAO implements IGenericDAO<Registration>, IRegistration
     }
 
     @Override
-    public List<Registration> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Registration getById(int id) {
+    public List<Lesson> getAll() {
         EntityManager em = null;
         try {
             em = open();
 
-            return em.getReference(Registration.class, id);
+            Query q = em.createQuery("SELECT l from Lesson l");
+
+            return q.getResultList();
+        } catch (Exception e) {
+            return new ArrayList<>();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    @Override
+    public Lesson getById(int id) {
+        EntityManager em = null;
+        try {
+            em = open();
+
+            return em.getReference(Lesson.class, id);
         } catch (Exception e) {
             return null;
         } finally {
@@ -83,23 +94,20 @@ public class RegistrationDAO implements IGenericDAO<Registration>, IRegistration
     }
 
     @Override
-    public List<Registration> getByStudentId(int id) {
+    public List<Lesson> getAllByInstructorId(int idInstructor) {
         EntityManager em = null;
         try {
             em = open();
-            String jpql = "select r from Registration r "
-                    + " where r.student = :stu ";
 
-            Student s = new Student();
-            s.setId(id);
-            Query q = em.createQuery(jpql);
-            q.setParameter("stu", s);
+            Query q = em.createQuery("SELECT l from Lesson l WHERE l.instructor = :id");
+
+            Instructor temp = new Instructor();
+            temp.setId(idInstructor);
+            q.setParameter("id", temp);
 
             return q.getResultList();
-        } catch (NoResultException e) {
-            return null;
-        } catch (NonUniqueResultException e) {
-            return null;
+        } catch (Exception e) {
+            return new ArrayList<>();
         } finally {
             if (em != null) {
                 em.close();
@@ -108,21 +116,20 @@ public class RegistrationDAO implements IGenericDAO<Registration>, IRegistration
     }
 
     @Override
-    public List<Registration> getWithLessons() {
+    public List<Lesson> getAllByRegistrationId(int idRegistration) {
         EntityManager em = null;
         try {
             em = open();
-            String jpql = "select r from Registration r "
-                    + " INNER JOIN Lesson l ";
 
-            Query q = em.createQuery(jpql);
-            // q.setParameter("id", id);
+            Query q = em.createQuery("SELECT l from Lesson l WHERE l.registration = :id");
+
+            Registration temp = new Registration();
+            temp.setId(idRegistration);
+            q.setParameter("id", temp);
 
             return q.getResultList();
-        } catch (NoResultException e) {
-            return null;
-        } catch (NonUniqueResultException e) {
-            return null;
+        } catch (Exception e) {
+            return new ArrayList<>();
         } finally {
             if (em != null) {
                 em.close();
@@ -131,22 +138,16 @@ public class RegistrationDAO implements IGenericDAO<Registration>, IRegistration
     }
 
     @Override
-    public List<Registration> getByStudentName(String name) {
+    public List<Lesson> getAllFree() {
         EntityManager em = null;
         try {
             em = open();
 
-            String sql = "SELECT * FROM tb_registration r "
-                    + " INNER JOIN tb_student s ON r.student_id = s.student_id "
-                    + " WHERE s.student_name LIKE '%" + name + "%' ";
-
-            Query q = em.createNativeQuery(sql, Registration.class);
+            Query q = em.createQuery("SELECT l from Lesson l WHERE l.registration = null");
 
             return q.getResultList();
-        } catch (NoResultException e) {
-            return new ArrayList<Registration>();
-        } catch (NonUniqueResultException e) {
-            return new ArrayList<Registration>();
+        } catch (Exception e) {
+            return new ArrayList<>();
         } finally {
             if (em != null) {
                 em.close();
